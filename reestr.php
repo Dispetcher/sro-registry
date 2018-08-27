@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: Реестр СРО
- * Plugin URI: http://github.com/Dispetcher/registry
+ * Plugin Name: SRO Registry
+ * Plugin URI: http://github.com/Dispetcher/sro-registry
  * Description: Вывод информации о членах СРО
  * Version: 1.0
  * Author: Dmitry Skoblikov
@@ -24,15 +24,16 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+require_once( dirname( __FILE__ ) . '/options.php' );
 
 try {
-    $plugin = new ReestrSRO_Plugin();
+    $plugin = new RegistrySRO_Plugin();
     $plugin->init();
 } catch (Exception $e) {
     echo $e->getMessage();
 }
 
-class ReestrSRO_Plugin{
+class RegistrySRO_Plugin{
 
 	public function init(){
 		add_shortcode('reestrSroMain', array($this, 'reestrMain'));
@@ -40,19 +41,18 @@ class ReestrSRO_Plugin{
 	}
 
 	public function reestrMain(){
-		require_once(plugins_url('reestr/php/main.php'));
-		wp_enqueue_script('polyfills_ang4', plugins_url('reestr/js/polyfills.ang4.js') );
-		wp_enqueue_script('main_ang4', plugins_url('reestr/js/main/main.ang4.js') );
-		wp_enqueue_script('runtime_ang4', plugins_url('reestr/js/runtime.ang4.js') );
+		require_once(plugins_url('sro-registry/php/main.php'));
+		wp_enqueue_script('polyfills_ang4', plugins_url('sro-registry/js/polyfills.ang4.js') );
+		wp_enqueue_script('main_ang4', plugins_url('sro-registry/js/main/main.ang4.js') );
+		wp_enqueue_script('runtime_ang4', plugins_url('sro-registry/js/runtime.ang4.js') );
 	}
 
 	public function reestrPrint(){
-		require_once(plugins_url('reestr/php/print.php'));
-		wp_enqueue_script('polyfills_ang4', plugins_url('reestr/js/polyfills.ang4.js') );
-		wp_enqueue_script('main_ang4_print', plugins_url('reestr/js/print/main.ang4.print.js') );
-		wp_enqueue_script('runtime_ang4', plugins_url('reestr/js/runtime.ang4.js') );
+		require_once(plugins_url('sro-registry/php/print.php'));
+		wp_enqueue_script('polyfills_ang4', plugins_url('sro-registry/js/polyfills.ang4.js') );
+		wp_enqueue_script('main_ang4_print', plugins_url('sro-registry/js/print/main.ang4.print.js') );
+		wp_enqueue_script('runtime_ang4', plugins_url('sro-registry/js/runtime.ang4.js') );
 	}
-
 
 }
 

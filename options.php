@@ -2,6 +2,7 @@
 // create Registry plugin settings menu
 add_action('admin_menu', 'sro_registry_create_menu');
 
+
 function sro_registry_create_menu() {
 
 	//create new top-level menu
