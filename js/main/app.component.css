@@ -1,0 +1,457 @@
+/********* @Dispetcher last edit 10.04 *****/
+input {
+  padding: 4px;
+  font-size: 10pt;
+  font-weight: 400;
+}
+
+input[type=search], select {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+}
+
+select {
+  font-size: 11pt;
+  font-weight: 400;
+  padding: 3px;
+  border: 2px solid #eee;
+  border-style: inset;
+}
+
+.page_content .bottom_table .table_wrapper .undertable {
+  width: auto;
+}
+
+.main {
+  margin: auto;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.backgr {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: 0.6;
+  z-index: 9;
+}
+
+.table_header {
+  font-size: 16pt;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+.head {
+  background-color: #83e2c2;
+}
+
+thead tr td {
+  padding: 5px;
+  font-family: "RubikMedium";
+  font-weight: normal;
+  font-size: 14px;
+}
+
+tbody tr td {
+  font-size: 14px;
+}
+
+.body:nth-child(odd) {
+  background-color: #f2f2f3;
+}
+
+.body:nth-child(2n) {
+  background-color: #dbe5e9;
+}
+
+.id, .num_r {
+  width: 60px;
+}
+
+.status {
+  width: 95%;
+  min-width: 80px;
+  max-width: 160px;
+}
+
+.small {
+  width: 90%;
+  max-width: 110px;
+}
+
+.big {
+  width: #width_big;
+  min-width: 280px;
+}
+
+.inn, .ogrn {
+  width: 95%;
+}
+
+.item td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #fff;
+}
+
+/********** Popup window  ***********/
+.popup {
+  position: absolute;
+  margin: 0 25vw;
+  padding: 20px;
+  top: 5vh;
+  left: 0;
+  background-color: #fff;
+  z-index: 10;
+}
+
+.popup table tr:nth-child(odd) {
+  background-color: #e2eaed;
+}
+
+.popup table tr td {
+  padding: 10px;
+  text-align: center;
+  font-size: 12pt;
+  border: 2px solid #fff;
+}
+
+h4 {
+  text-align: center;
+}
+
+.agent_id {
+  display: none;
+}
+
+#popup_table {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  top: 350px;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+}
+
+.popup_header {
+  background-color: #83e2c2;
+}
+
+.print_win {
+  top: 0;
+}
+
+#linkprint {
+  position: absolute;
+  top: 5px;
+  padding: 4px 5px 5px 23px;
+  color: #222;
+  cursor: pointer;
+  /*font-style: italic*/
+  /*font-weight: 600*/
+}
+
+.lnkprint span img {
+  position: absolute;
+  top: 8px;
+}
+
+/********     Close btn       ********/
+.close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  border: 1px solid #888;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.close:after, .close:before {
+  position: absolute;
+  top: 5px;
+  right: 11px;
+  content: ' ';
+  height: 15px;
+  width: 2px;
+  background-color: gray;
+  cursor: pointer;
+  transform: rotate(45deg);
+}
+
+.close:before {
+  transform: rotate(-45deg);
+}
+
+.header_name {
+  font-size: 14pt;
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.form_col_ext {
+  max-width: 320px;
+}
+
+.form_col_hide {
+  max-width: 400px;
+}
+
+/******/
+/*====== Print Version ===========*/
+/******/
+.table_print {
+  border: 4px solid #eee;
+}
+
+/******/
+/*======Pagnation===========*/
+/******/
+.bottom_table {
+  margin-top: 20px;
+}
+
+.btm_cell {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  margin: 0 5px 10px;
+  padding: 0;
+  border: 1px solid #cedfe9;
+  background: #e6eced;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  line-height: 28px;
+  cursor: pointer;
+}
+
+.curr {
+  border-style: inset;
+  border-width: 2px;
+  background: #fff;
+}
+
+.serv_cells {
+  padding: 0 10px;
+  width: auto;
+}
+
+.tostart {
+  margin-left: 0;
+}
+
+/*******/
+/*========== MEDIA ======= ***/
+/*******/
+@media (max-width: 1220px) {
+  .popup {
+    margin: 0 15vw;
+  }
+}
+
+@media (max-width: 1024px) {
+  .popup {
+    margin: 0 10vw;
+  }
+  select {
+    padding: 1px;
+  }
+}
+
+@media (max-width: 860px) {
+  .popup {
+    margin: 0 5vw 0 1vw;
+  }
+  .backgr {
+    width: 100vw;
+  }
+}
+
+@media (max-width: 790px) {
+  input[type=search], select {
+    font-weight: 200;
+  }
+  tbody tr td {
+    font-size: 10pt;
+  }
+  .item td {
+    padding: 8px;
+  }
+  .big {
+    min-width: auto;
+  }
+  thead tr td {
+    font-size: 11pt;
+  }
+  .status {
+    width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .popup table tbody tr td {
+    font-size: 10pt;
+  }
+  .close:after, .close:before {
+    right: 11px;
+  }
+  #popup_table {
+    top: 370px;
+  }
+}
+
+/* Iphone 5/5s/SE - landscape - w568*/
+@media (max-width: 570px) {
+  .status {
+    min-width: auto;
+  }
+  .header_name {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 540px) {
+  .status {
+    min-width: 60px;
+  }
+  .main thead tr td {
+    font-size: 10pt;
+  }
+  .item td {
+    padding: 8px 6px 8px 3px;
+  }
+  tbody .item td {
+    padding-right: 3px;
+  }
+  input[type=search], select {
+    width: 85%;
+  }
+  .big {
+    min-width: 190px;
+  }
+  .close:after, .close:before {
+    right: 11px;
+  }
+  .btm_cell {
+    height: 30px;
+    width: 30px;
+    margin: 10px 5px;
+  }
+}
+
+/***** Iphone 6/7/8 Plus - w414 *****/
+@media (max-width: 420px) {
+  tbody .item td {
+    font-size: 8pt;
+    padding: 8px 1px;
+  }
+  .main thead tr td {
+    font-size: 8pt;
+  }
+  .status {
+    min-width: 40px;
+  }
+  .big {
+    min-width: 152px;
+  }
+  .popup table tbody tr td {
+    font-size: 9pt;
+  }
+  .popup {
+    padding: 5px;
+  }
+  .popup table tr td {
+    padding: 10px 5px;
+  }
+  .form_col_ext {
+    width: 170px;
+  }
+  .form_col_hide {
+    width: 195px;
+  }
+  select[name=status] {
+    width: 90px;
+  }
+  .btm_cell {
+    height: 30px;
+    width: 27px;
+    margin: 10px 2px;
+  }
+  #linkprint {
+    font-size: 13px;
+  }
+}
+
+/*********** Iphone 6/7/8/X - w375***********/
+@media (max-width: 380px) {
+  .big {
+    min-width: 180px;
+  }
+  .form_col_ext {
+    width: 150px;
+  }
+  .form_col_hide {
+    width: 180px;
+  }
+  .btm_cell {
+    height: 30px;
+    width: 24px;
+    margin: 10px 2px;
+  }
+}
+
+/* Galaxy S5 - w360*/
+@media (max-width: 360px) {
+  .big {
+    min-width: 167px;
+  }
+  .form_col_hide {
+    width: 165px;
+  }
+  .item td {
+    padding: 8px;
+  }
+  select[name=status] {
+    width: 70px;
+  }
+  .btm_cell {
+    height: 30px;
+    width: 23px;
+    margin: 10px 2px;
+  }
+}
+
+/******** Iphone 5/5S/SE - w320 **********/
+@media (max-width: 330px) {
+  .big {
+    min-width: 130px;
+  }
+  .form_col_ext {
+    width: 130px;
+  }
+  .form_col_hide {
+    width: 145px;
+  }
+  tbody .item td {
+    font-size: 7pt;
+  }
+  .popup table tbody tr td {
+    font-size: 8pt;
+  }
+  .btm_cell {
+    height: 30px;
+    width: 22px;
+    margin: 10px 1px;
+  }
+}
