@@ -1,5 +1,9 @@
 <?php
 
+/*Get plugin settings*/
+include 'process.php';
+$tableName = $tableDet;
+
 /* Define server and DB*/
 define ("DB_HOST", "u345295.mysql.masterhost.ru");
 define ("DB_LOGIN", "u345295");
@@ -14,14 +18,19 @@ $postdata = file_get_contents('php://input');
 $request = json_decode($postdata);
 $sql_id = $request;
 
-
 if(!$con){
 	die("connection failure".mysqli_connect_error());
 }
 
 mysqli_set_charset($con, 'utf8');
 
-$sql = "SELECT `COLNAME`, `COLVALUE` FROM `es_metrotunnel_details` WHERE `id_agent` = $sql_id";
+if(!$tableName){
+	$tableName = 'es_metrotunnel_details';
+}
+
+//$sql = "SELECT `COLNAME`, `COLVALUE` FROM `es_metrotunnel_details` WHERE `id_agent` = $sql_id";
+$sql = "SELECT `COLNAME`, `COLVALUE` FROM `$tableName` WHERE `id_agent` = $sql_id";
+
 
 /*Query to database*/
 $res = mysqli_query($con, $sql);

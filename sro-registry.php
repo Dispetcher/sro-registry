@@ -8,7 +8,7 @@
  * Author URI: http://github.com/Dispetcher
  */
 
-/*  Copyright 2018 Dmitry Skoblikov
+/*  Copyright 2018 Dmitry Skoblikov (email: dmitryskoblikov@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,22 +36,22 @@ try {
 class RegistrySRO_Plugin{
 
 	public function init(){
-		add_shortcode('reestrSroMain', array($this, 'reestrMain'));
-		add_shortcode('reestrSroPrint', array($this, 'reestrPrint'));
+		add_shortcode('registrySroMain', array($this, 'registryMain'));
+		add_shortcode('registrySroPrint', array($this, 'registryPrint'));
 	}
 
-	public function reestrMain(){
+	public function registryMain(){
 		require_once(plugins_url('sro-registry/php/main.php'));
-		wp_enqueue_script('polyfills_ang4', plugins_url('sro-registry/js/polyfills.ang4.js') );
-		wp_enqueue_script('main_ang4', plugins_url('sro-registry/js/main/main.ang4.js') );
-		wp_enqueue_script('runtime_ang4', plugins_url('sro-registry/js/runtime.ang4.js') );
+		wp_enqueue_script('polyfillsScript', plugins_url('sro-registry/js/polyfills.ang4.js') );
+		wp_enqueue_script('mainScript', plugins_url('sro-registry/js/main/main.ang4.js') );
+		wp_enqueue_script('runtimeScript', plugins_url('sro-registry/js/runtime.ang4.js') );
 	}
 
-	public function reestrPrint(){
+	public function registryPrint(){
 		require_once(plugins_url('sro-registry/php/print.php'));
-		wp_enqueue_script('polyfills_ang4', plugins_url('sro-registry/js/polyfills.ang4.js') );
-		wp_enqueue_script('main_ang4_print', plugins_url('sro-registry/js/print/main.ang4.print.js') );
-		wp_enqueue_script('runtime_ang4', plugins_url('sro-registry/js/runtime.ang4.js') );
+		wp_enqueue_script('polyfillsScript', plugins_url('sro-registry/js/polyfills.ang4.js') );
+		wp_enqueue_script('mainScriptPrint', plugins_url('sro-registry/js/print/main.ang4.print.js') );
+		wp_enqueue_script('runtimeScript', plugins_url('sro-registry/js/runtime.ang4.js') );
 	}
 
 }

@@ -27,19 +27,17 @@ servVar:number = 0; /* detect a need to run mergecell in opening company details
 firstVChanged:number=0; /* Detect when array renders, when 1 - first rendered, 2 - rendered with filters*/
 elmsOnPages:number;
 elmPages:number;
-cOnPage:number = 30; /* Number of companies on a single page*/
+cOnPage:number; /* Number of companies on a single page*/
 printVer:string = 'Версия для печати'; /* Name of link to print ver.*/
-compsListUrl:string = this.host +'/wp-content/plugins/reestr/php/compslist.php'; /* Link to general companies list*/
-compDetailsUrl:string = this.host + '/wp-content/plugins/reestr/php/compinfo.php';/* Link to company details */
-compNameUrl:string = this.host + '/wp-content/plugins/reestr/php/compname.php';/* Link to get company name */
-processUrl:string = this.host + '/wp-content/plugins/reestr/php/process.php';/* Link to get setting*/
+compsListUrl:string = '../wp-content/plugins/sro-registry/php/compslist.php'; /* Link to general companies list*/
+compDetailsUrl:string = '../wp-content/plugins/sro-registry/php/compinfo.php';/* Link to company details */
+compNameUrl:string = '../wp-content/plugins/sro-registry/php/compname.php';/* Link to get company name */
+processUrl:string = '../wp-content/plugins/sro-registry/php/process.php';/* Link to get setting*/
 
-constructor(private element:ElementRef, private http:Http, private cdRef:ChangeDetectorRef){
-	this.host = window.location.hostname;
-}
+constructor(private element:ElementRef, private http:Http, private cdRef:ChangeDetectorRef){}
 
 ngOnInit(){
-	this.http.post(this.processUrl, 'cp')
+	this.http.post(this.processUrl, 1)
 	.subscribe(
 		(data)=>{this.cOnPage = Number(data.json())
 	});
@@ -47,14 +45,19 @@ ngOnInit(){
 	this.http.get(this.compsListUrl)
 	.subscribe(
 		(data)=>{this.companies = data.json(); 
-			this.compLen(this.companies); /* sub func for arrPages to get page numbers */
-			this.arrPages(); /* add page numbers to array*/
-			this.orgChlenSro(); /* get number of companies which are in SRO */
-			this.cdRef.detectChanges(); /* force run rendering a DOM tree */
-			this.hideOrg();
-			this.paginate(1, 0);
-			this.elmsOnPages = this.element.nativeElement.querySelectorAll('.item.body').length;
-			this.firstVChanged = 1;
+			this.http.post(this.processUrl, 1)
+				.subscribe(
+				(data)=>{this.cOnPage = Number(data.json());
+				this.compLen(this.companies); /* sub func for arrPages to get page numbers */
+				this.arrPages(); /* add page numbers to array*/
+				this.orgChlenSro(); /* get number of companies which are in SRO */
+				this.cdRef.detectChanges(); /* force run rendering a DOM tree */
+				this.hideOrg();
+				this.paginate(1, 0);
+				this.elmsOnPages = this.element.nativeElement.querySelectorAll('.item.body').length;
+				this.firstVChanged = 1;
+			});
+			
 		}
 	);
 	this.searchOpen();
@@ -94,6 +97,9 @@ compLen(c){
 		c = this.companies;
 	}
 	let cl = c.length;
+	if(!this.cOnPage){
+		this.cOnPage = 30
+	}
 	if (cl%this.cOnPage > 0){
 		this.pNums = (cl - cl%this.cOnPage) / this.cOnPage + 1;
 	}else{
@@ -159,7 +165,7 @@ openMore(num){
 	this.paginate(num, this.pNums);
 
 	if(num){
-		if(b > elms){
+		if(b >= elms){
 			this.showmore(a, elms-1);
 		}else{
 			this.showmore(a, b);

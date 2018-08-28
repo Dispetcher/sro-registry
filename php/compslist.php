@@ -1,10 +1,20 @@
 <?php
 
+/*Get plugin settings*/
+session_start();
+$tableName = $_SESSION['table_gen'];
+$dbName = $_SESSION['db_name'];
+
 /* Define server and DB*/
 define ("DB_HOST", "u345295.mysql.masterhost.ru");
 define ("DB_LOGIN", "u345295");
 define ("DB_PASS", "unch24aropped");
-define ("DB_NAME", "u345295_metrotun");
+
+if(!$dbName){
+	$dbName = "u345295_metrotun";
+}
+
+define ("DB_NAME", $dbName );
 
 /*Connect ot DB*/
 $con = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASS, DB_NAME);
@@ -15,7 +25,10 @@ if(!$con){
 
 mysqli_set_charset($con, 'utf8');
 
-$sql = "SELECT `ID_AGENT`, `MEMBERNAME`, `REESTR_NUM`, `INN`, `OGRN`, `AGENTSTATUSE` FROM `es_metrotunnel_list` ORDER BY `REESTR_NUM`";
+if(!$tableName){
+	$tableName = 'es_metrotunnel_list';
+}
+$sql = "SELECT `ID_AGENT`, `MEMBERNAME`, `REESTR_NUM`, `INN`, `OGRN`, `AGENTSTATUSE` FROM `$tableName` ORDER BY `REESTR_NUM`";
 
 /*Query to database*/
 $res = mysqli_query($con, $sql);
