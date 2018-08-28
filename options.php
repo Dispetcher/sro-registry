@@ -1,24 +1,23 @@
 <?php
-// create Registry plugin settings menu
+// create SRO-Registry plugin settings menu
 add_action('admin_menu', 'sro_registry_create_menu');
 
 
 function sro_registry_create_menu() {
 
-	//create new top-level menu
-	add_menu_page('SRO Registry Plugin Settings', 'Registry Settings', 'administrator', __FILE__, 'registry_opt_page', plugins_url('/img/pl_icon.png', __FILE__));
+    //create menu
+    add_menu_page('SRO Registry Plugin Settings', 'Registry Settings', 'administrator', __FILE__, 'registry_opt_page', plugins_url('/img/pl_icon.png', __FILE__));
 
-	//call register settings function
-	add_action( 'admin_init', 'register_pl_settings' );
+    //register settings function
+    add_action( 'admin_init', 'register_pl_settings' );
 }
 
 
 function register_pl_settings() {
-	//register our settings
-	register_setting( 'sro-registry-group', 'cToPage' );
-	register_setting( 'sro-registry-group', 'dbName' );
-    register_setting( 'sro-registry-group', 'tableGenName' );
-    register_setting( 'sro-registry-group', 'tableDetName' );
+    register_setting( 'sro-registry-group', 'c_to_page' );
+    register_setting( 'sro-registry-group', 'db_name' );
+    register_setting( 'sro-registry-group', 'table_gen_name' );
+    register_setting( 'sro-registry-group', 'table_det_name' );
 }
 
 function registry_opt_page() {
@@ -31,22 +30,22 @@ function registry_opt_page() {
     <table class="form-table">
         <tr valign="top">
         <th scope="row">Наименование БД</th>
-        <td><input type="text" name="dbName" value="<?php echo get_option('dbName'); ?>" /></td>
+        <td><input type="text" name="db_name" value="<?php echo get_option('db_name'); ?>" /></td>
         </tr>
 
         <tr valign="top">
         <th scope="row">Наименование таблицы для общей информации по всем компаниям</th>
-        <td><input type="text" name="tableGenName" value="<?php echo get_option('tableGenName'); ?>" /></td>
+        <td><input type="text" name="table_gen_name" value="<?php echo get_option('table_gen_name'); ?>" /></td>
         </tr>
 
         <tr valign="top">
         <th scope="row">Наименование таблицы для детальной информации по каждой компании</th>
-        <td><input type="text" name="tableDetName" value="<?php echo get_option('tableDetName'); ?>" /></td>
+        <td><input type="text" name="table_det_name" value="<?php echo get_option('table_det_name'); ?>" /></td>
         </tr>
          
         <tr valign="top">
         <th scope="row">Количество компаний на странице</th>
-        <td><input type="text" name="cToPage" value="<?php echo get_option('cToPage'); ?>" /></td>
+        <td><input type="text" name="c_to_page" value="<?php echo get_option('c_to_page'); ?>" /></td>
         </tr>        
         
     </table>
