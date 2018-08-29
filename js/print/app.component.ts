@@ -14,8 +14,8 @@ compDetails:any;/* For popup window - array with details*/
 link:string;
 orgName:string;
 cId:number;
-compNameUrl:string = '../wp-content/plugins/sro-registry/php/compname.php';/* Link to get company name */
-compInfoUrl:string = '../wp-content/plugins/sro-registry/php/compinfo.php';/* Link to get company details */
+compNameUrl:string = '../../wp-content/plugins/sro-registry/php/compname.php';/* Link to get company name */
+compInfoUrl:string = '../../wp-content/plugins/sro-registry/php/compinfo.php';/* Link to get company details */
 
 constructor(private element:ElementRef, private http:Http, private cdRef:ChangeDetectorRef){}
 

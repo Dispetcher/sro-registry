@@ -6,7 +6,7 @@ add_action('admin_menu', 'sro_registry_create_menu');
 function sro_registry_create_menu() {
 
     //create menu
-    add_menu_page('SRO Registry Plugin Settings', 'Registry Settings', 'administrator', __FILE__, 'registry_opt_page', plugins_url('/img/pl_icon.png', __FILE__));
+    add_menu_page('SRO Registry Plugin Settings', 'Настройки реестра СРО', 'administrator', __FILE__, 'registry_opt_page', plugins_url('/img/pl_icon.png', __FILE__));
 
     //register settings function
     add_action( 'admin_init', 'register_pl_settings' );
@@ -27,6 +27,7 @@ function registry_opt_page() {
 
 <form method="post" action="options.php">
     <?php settings_fields( 'sro-registry-group' ); ?>
+    <p><input type="checkbox" id="hideset" onclick="hidesettings()" checked="checked"><label for="hideset" onclick="hidesettings()">Скрыть системные настройки</label></p>
     <table class="form-table">
         <tr valign="top">
         <th scope="row">Наименование БД</th>
@@ -56,4 +57,26 @@ function registry_opt_page() {
 
 </form>
 </div>
+<script>
+var el = document.querySelectorAll(".form-table tbody tr");
+ /***** Hide core settings *****/
+function hidesettings(){
+
+    if(document.querySelector("#hideset").checked){
+        for(let i=0; i<el.length-1; i++){
+        el[i].style.display = "none";
+        }
+    }else{
+        for(let i=0; i<el.length-1; i++){
+        el[i].style.display = "table-row";
+        }
+    }
+}
+
+if(document.querySelector("#hideset").checked){
+    for(let i=0; i<el.length-1; i++){
+        el[i].style.display = "none";
+    }
+}
+</script>
 <?php } ?>
