@@ -1,0 +1,70 @@
+<div class="page_content_orgnumbers">
+    По состоянию на {{curDate}} года количество действующих членов СРО &mdash; {{orgNums}}
+</div>
+
+<div id="popup_table">
+    <div class="popup">
+        <div>
+            <span class="close" (click)="hide()"></span>
+        </div>  
+        <div class="lnkprint">
+            <span (click)="openPrintVer()"><img src="../wp-content/plugins/sro-registry/img/printer_icon.png" alt="Print Version"><span id="linkprint">{{printVer}}</span></span>
+        </div>
+        <table>
+            <caption class="header_name">{{orgName}}</caption>
+            <tr *ngFor="let cd of compDet">
+                <td class="form_col_ext">{{cd.COLNAME}}</td>
+                <td class="form_col_hide">{{cd.COLVALUE}}</td>
+            </tr>
+        </table>
+    </div> <!--*** .popup ***-->    
+
+    <div class="backgr"></div>
+</div><!--*** .popup_table ***--> 
+
+<div>
+    <h4 class="table_header">Реестр организаций</h4>
+    <table class="main">
+        <thead>
+        <tr class="item head">
+            <td class="agent_id">Agent ID</td>
+            <td>№ в реестре</td>
+            <td>Статус члена</td>
+            <td>Наименование организации</td>
+            <td>ИНН</td>
+            <td>ОГРН</td>
+        </tr>
+        <tr class="item">
+            <td class="agent_id"><input type='text' [(ngModel)]="agentId"></td>
+            <td><input type="search" class="small num_r" [(ngModel)]="numR"></td>
+            <td><select name= "status" [(ngModel)]="status">
+                <option value="Все члены">Все члены СРО</option>
+                <option value="Член СРО">Член СРО</option>
+                <option value="Исключен">Исключен</option>
+            </select></td>
+            <td><input type="search" class="big" [(ngModel)]="name"></td>
+            <td><input type="search" class="small inn" [(ngModel)]="inn"></td>
+            <td><input type="search" class="small ogrn" [(ngModel)]="ogrn"></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="item body" *ngFor="let c of companies | filterByNum: numR | filterByStatus: status | filterByName: name | filterByINN: inn | filterByOGRN: ogrn" (click)="openUp(c.ID_AGENT, c.MEMBERNAME)">
+            <td class="agent_id">{{c.ID_AGENT}}</td>
+            <td>{{c.REESTR_NUM}}</td>
+            <td id="orgstatus">{{c.AGENTSTATUSE}}</td>
+            <td>{{c.MEMBERNAME}}</td>
+            <td>{{c.INN}}</td>
+            <td>{{c.OGRN}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="bottom_table">
+  <div class="btm_cell serv_cells tostart" (click)="openMore(1)"> в начало </div>
+  <div class="btm_cell serv_cells" (click)="openMore('prev')"> предыдущая </div>
+  <div class="btm_cell serv_cells" (click)="openMore('empty')"> .. </div>
+  <div class="btm_cell" *ngFor="let num of row" (click)="openMore(num)">{{num}}</div>
+  <div class="btm_cell serv_cells" (click)="openMore('next')"> следующая </div>
+  <div class="btm_cell serv_cells toend" (click)="openMore('max')"> в конец </div>
+</div>
