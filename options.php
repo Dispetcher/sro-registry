@@ -6,7 +6,7 @@ add_action('admin_menu', 'sro_registry_create_menu');
 function sro_registry_create_menu() {
 
     //create menu
-    add_menu_page('SRO Registry Plugin Settings', 'Настройки реестра СРО', 'administrator', __FILE__, 'registry_opt_page', plugins_url('/img/pl_icon.png', __FILE__));
+    add_menu_page('SRO Registry Plugin Settings', 'Настройки плагина "Реестр СРО"', 'administrator', __FILE__, 'registry_opt_page', plugins_url('/img/pl_icon.png', __FILE__));
 
     //register settings function
     add_action( 'admin_init', 'register_pl_settings' );
