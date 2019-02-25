@@ -1,55 +1,39 @@
 <?php
 
-/*Get plugin settings*/
-session_start();
-$tableName = $_SESSION['table_gen'];
-$dbName = $_SESSION['db_name'];
+$xml = simplexml_load_file("../xml/reestr.xml");
 
-/* Define server and DB*/
-define ("DB_HOST", "u345295.mysql.masterhost.ru");
-define ("DB_LOGIN", "u345295");
-define ("DB_PASS", "unch24aropped");
+/*Получаем переменную из Ангулара*/
+$postdata = file_get_contents('php://input');
+$request = json_decode($postdata);
+$xml_id = (string)$request->id;
 
-if(!$dbName){
-	$dbName = "u345295_metrotun";
+foreach ($xml->children() as $key) {
+	$companies[] = array('ID_AGENT' => (string)$key->ID_AGENT,
+							'MEMBERNAME' => (string)$key->MEMBERNAME,
+							'REESTR_NUM' => (integer)$key->REESTR_NUM,
+							'AGENTSTATUSE' => (string)$key->STATUS,
+							'INN' => (string)$key->INN,
+							'OGRN' => (string)$key->OGRN
+						);
 }
 
-define ("DB_NAME", $dbName );
+if(!$xml_id){
+	print json_encode($companies);
+}else{
 
-/*Connect ot DB*/
-$con = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASS, DB_NAME);
-
-if(!$con){
-	die("connection failure".mysqli_connect_error());
-}
-
-mysqli_set_charset($con, 'utf8');
-
-if(!$tableName){
-	$tableName = 'es_metrotunnel_list';
-}
-$sql = "SELECT `ID_AGENT`, `MEMBERNAME`, `REESTR_NUM`, `INN`, `OGRN`, `AGENTSTATUSE` FROM `$tableName` ORDER BY `REESTR_NUM`";
-
-/*Query to database*/
-$res = mysqli_query($con, $sql);
-
-$data = array();
-
-/*Add strings to array*/
-if($res->num_rows > 0){
-	while ($row = $res->fetch_assoc()){
-		$row['MEMBERNAME'] = str_replace('"', '', $row['MEMBERNAME']); /* Remove extra quotes*/
-		$row_n = array('ID_AGENT' => $row['ID_AGENT'] ,
-		'MEMBERNAME' => $row['MEMBERNAME'],
-		'REESTR_NUM' => (integer)$row['REESTR_NUM'],
-		'INN' => $row['INN'],
-		'OGRN' => $row['OGRN'],
-		'AGENTSTATUSE' => $row['AGENTSTATUSE']);
-		$data[] = $row_n;
+	$memName = array(); /*выходной массив*/
+	$i = 0; /*initial state*/
+	foreach($companies as $k => $v){
+	
+		if($v['ID_AGENT'] == $xml_id){
+			$memName = array('MEMBERNAME' => (string)$v['MEMBERNAME']);
+		}
+	
+		$i++;
 	}
+	print json_encode($memName);
 }
 
-/*Output encoded JSON data*/
-print json_encode($data);
 
 ?>
+

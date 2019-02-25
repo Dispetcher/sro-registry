@@ -13,8 +13,8 @@ host:string;
 compDetails:any;/* For popup window - array with details*/
 link:string;
 orgName:string;
-cId:number;
-compNameUrl:string = '../../wp-content/plugins/sro-registry/php/compname.php';/* Link to get company name */
+cId:string;
+compNameUrl:string = '../../wp-content/plugins/sro-registry/php/compslist.php';/* Link to get company name */
 compInfoUrl:string = '../../wp-content/plugins/sro-registry/php/compinfo.php';/* Link to get company details */
 
 constructor(private element:ElementRef, private http:Http, private cdRef:ChangeDetectorRef){}
@@ -22,15 +22,14 @@ constructor(private element:ElementRef, private http:Http, private cdRef:ChangeD
 ngOnInit(){
 	this.getId();
 
-	this.http.post( this.compNameUrl, this.cId )
+	this.http.post( this.compNameUrl, {"id":this.cId} )
 	.subscribe(
 		(data)=>{let org = data.json();
-			let orgN = org[0];
-			this.orgName = orgN['MEMBERNAME'];
+			this.orgName = org['MEMBERNAME'];
 		}
 	);
 
-	this.http.post(this.compInfoUrl, this.cId)
+	this.http.post(this.compInfoUrl, {"id":this.cId})
 	.subscribe(
 		(data)=>{this.compDetails = data.json();
 			this.cdRef.detectChanges();
@@ -45,7 +44,7 @@ getId(){
 	this.link = window.location.href;
 	if(this.link.indexOf('#id-')!= -1){
 		let indx = this.link.indexOf('id-') + 3;
-		this.cId = parseInt(this.link.slice(indx));
+		this.cId = this.link.slice(indx);
 	}
 	return this.cId;
 }

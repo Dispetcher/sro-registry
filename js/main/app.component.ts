@@ -24,14 +24,14 @@ orgName:string;/* For popup window - name of the company*/
 linkId:string;/* For popup window - link for print ver*/
 compShow:any; /* Current number of shown companies */
 servVar:number = 0; /* detect a need to run mergecell in opening company details window*/
-firstVChanged:number=0; /* Detect when array renders, when 1 - first rendered, 2 - rendered with filters*/
+firstVChanged:number = 0; /* Detect when array renders, when 1 - first rendered, 2 - rendered with filters*/
 elmsOnPages:number;
 elmPages:number;
 cOnPage:number; /* Number of companies on a single page*/
 printVer:string = 'Версия для печати'; /* Name of link to print ver.*/
 compsListUrl:string = '../wp-content/plugins/sro-registry/php/compslist.php'; /* Link to general companies list*/
 compDetailsUrl:string = '../wp-content/plugins/sro-registry/php/compinfo.php';/* Link to company details */
-compNameUrl:string = '../wp-content/plugins/sro-registry/php/compname.php';/* Link to get company name */
+compNameUrl:string = '../wp-content/plugins/sro-registry/php/compslist.php';/* Link to get company name */
 processUrl:string = '../wp-content/plugins/sro-registry/php/process.php';/* Link to get setting*/
 
 constructor(private element:ElementRef, private http:Http, private cdRef:ChangeDetectorRef){}
@@ -361,7 +361,7 @@ openUp(id, name){
 	/**  Получаем имя в заголовок на всплюывающем окне **/
 	this.orgName = name;
 	
-	this.http.post(this.compDetailsUrl, id).
+	this.http.post(this.compDetailsUrl, {"id":id}).
 	subscribe(
 		(data)=>{
 			this.compDet = data.json();
