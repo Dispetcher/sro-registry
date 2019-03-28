@@ -42,16 +42,18 @@ class RegistrySRO_Plugin{
 
 	public function registryMain(){
 		require_once(plugins_url('sro-registry/php/main.php'));
-		wp_enqueue_script('polyfillsScript', plugins_url('sro-registry/js/polyfills.ang4.js') );
-		wp_enqueue_script('mainScript', plugins_url('sro-registry/js/main/main.ang4.js') );
-		wp_enqueue_script('runtimeScript', plugins_url('sro-registry/js/runtime.ang4.js') );
+		wp_enqueue_script('polyfillsScript', plugins_url('sro-registry/js/polyfills.ang7.js') );
+		wp_enqueue_script('mainScript', plugins_url('sro-registry/js/main/main.ang7.js') );
+		wp_enqueue_script('runtimeScript', plugins_url('sro-registry/js/runtime.ang7.js') );
+		wp_enqueue_script('runtimeScript', plugins_url('sro-registry/js/es2015-polyfills.ang7.js') );
 	}
 
 	public function registryPrint(){
 		require_once(plugins_url('sro-registry/php/print.php'));
-		wp_enqueue_script('polyfillsScript', plugins_url('sro-registry/js/polyfills.ang4.js') );
-		wp_enqueue_script('mainScriptPrint', plugins_url('sro-registry/js/print/main.ang4.print.js') );
-		wp_enqueue_script('runtimeScript', plugins_url('sro-registry/js/runtime.ang4.js') );
+		wp_enqueue_script('polyfillsScript', plugins_url('sro-registry/js/polyfills.ang7.js') );
+		wp_enqueue_script('mainScriptPrint', plugins_url('sro-registry/js/print/main.ang7.print.js') );
+		wp_enqueue_script('runtimeScript', plugins_url('sro-registry/js/runtime.ang7.js') );
+		wp_enqueue_script('runtimeScript', plugins_url('sro-registry/js/es2015-polyfills.ang7.js') );
 	}
 
 }
