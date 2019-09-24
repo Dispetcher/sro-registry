@@ -68,7 +68,7 @@ it('should create app', ()=>{
   it('var orgNums should be 206', async ()=>{
     await fixture.whenStable().then( ()=>{
      // console.log('3 orgNums', component.orgNums);
-      expect(component.orgNums).toEqual('200');
+      expect(component.orgNums).toEqual('206');
       });  
 
   });
@@ -77,14 +77,14 @@ it('should create app', ()=>{
    await fixture.whenStable().then( ()=>{
       let elems:HTMLCollection = fixture.nativeElement.querySelectorAll('.item.body');
       console.log(elems.length);
-      expect(elems.length).toEqual(394);
+      expect(elems.length).toEqual(400);
    });
   });
 
   it('should get the array.length = 400', async ()=>{
     const companies = await compslist.getCompsList().toPromise();
     console.log('5 async 400 comp', Object.keys(companies).length);
-    expect(Object.keys(companies).length).toEqual(394);    
+    expect(Object.keys(companies).length).toEqual(400);    
   });
 
   it('should show companies from 31 till 60 when clicked on 2nd page button and attr of 31st company is table-row', async()=>{
@@ -122,7 +122,7 @@ it('should create app', ()=>{
       fixture.detectChanges();
       let elems:HTMLCollection = fixture.nativeElement.querySelectorAll('.item.body');
       console.log('9 reset to default', elems.length);
-      expect(elems.length).toEqual(394);
+      expect(elems.length).toEqual(400);
    });
   });
 
@@ -130,9 +130,30 @@ it('should create app', ()=>{
       await fixture.whenStable().then( ()=>{
       let elems = fixture.debugElement.queryAll(By.css('.btm_cell'));
       elems[6].triggerEventHandler('click', null);
-      let comp_elems:HTMLCollection = fixture.nativeElement.querySelectorAll('.item.body');
+      let comp_elems = fixture.nativeElement.querySelectorAll('.item.body');
       console.log('10', comp_elems[92].getAttribute('style'));
       expect(comp_elems[92].getAttribute('style')).toContain('table-row');
     });    
   }); 
+
+  it('should display popup with company details', async()=>{
+  	 await fixture.whenStable().then( ()=>{
+  	 	
+  	 	let elems = fixture.debugElement.queryAll(By.css('.item.body'));
+  	 	//elems[92].triggerEventHandler('click', null);
+  	 	elems[92].nativeElement.click();
+  	 	let popup = fixture.debugElement.query(By.css('#popup_table'));
+  	 	console.log('11-popup', popup.nativeElement.style.display);
+  	 	expect(popup.nativeElement.style.display).toBe('block');
+  	 	let headerNamePopup = fixture.nativeElement.querySelector('.header_name');
+  	 	console.log(headerNamePopup.textContent.toLowerCase());
+  	 	expect(headerNamePopup.textContent.toLowerCase()).toContain('288');
+
+  	 	var e = new KeyboardEvent("keydown", {key : "Esc"});
+  	 	Object.defineProperty(e, "keyCode", {"value" : 27});
+  	 	window.dispatchEvent(e);
+  	 	window.scrollTo(0,15);
+  	 } );
+  });
+  	 	
 });
