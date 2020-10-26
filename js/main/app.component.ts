@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
-import { Http, HttpModule } from '@angular/http';
+import { Http, HttpModule } from '@angular/http'; /*need to change path to angular/common/http*/
 
 @Component({
   selector: 'app-root',
@@ -21,7 +21,7 @@ ogrn:string; memberName:string;
 row:Array<string>; /* Array of page numbers */
 pNums:number; /* Number of companies pages on the MAIN PAGE*/
 orgName:string;/* For popup window - name of the company*/
-linkId:string;/* For popup window - link for print ver*/
+linkId:string;/* For popup window - link for print version*/
 compShow:any; /* Current number of shown companies */
 servVar:number = 0; /* detect a need to run mergecell in opening company details window*/
 firstVChanged:number = 0; /* Detect when array renders, when 1 - first rendered, 2 - rendered with filters*/
@@ -369,7 +369,7 @@ openUp(id, name){
 		}
 	);	
 
-	/**** Отслеживание нажатий, установка положения кнопки вверх 
+	/**** Click tracking, set 'to top' button 
 	======================================
 	*****/
 		
@@ -380,9 +380,9 @@ openUp(id, name){
 	======================================
 	*****/	
 	if (window.innerWidth < 420){
-		window.scrollTo(0, 395);
+		window.scrollTo(0, 405);
 	}else{
-		window.scrollTo(0, 360);
+		window.scrollTo(0, 375);
 	}
 
 	/********************Печатная версия карточки
